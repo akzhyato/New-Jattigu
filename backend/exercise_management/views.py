@@ -107,4 +107,3 @@ def exercise_category_delete(request, pk):
     if request.method == 'DELETE':
         category.delete()
         return Response(status=204)  # No Content
-

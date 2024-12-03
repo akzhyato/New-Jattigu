@@ -14,4 +14,3 @@ urlpatterns = [
     path('equipment_category/create/', views.equipment_category_create, name='equipment_category_create'),
     path('exercise/update/<int:pk>/', views.exercise_update, name='exercise_update'),
 ]
-

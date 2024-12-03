@@ -18,4 +18,8 @@ export default function BlogItems({ blog }) {
       <h2>{posts.names}</h2>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ebea25b5faf2cca59e4875c1b3a6bd56658b4d93

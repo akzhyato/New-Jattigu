@@ -17,6 +17,12 @@ class BlogPostCategoryView(generics.ListAPIView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']
+
+class BlogPostCategoryView(generics.ListAPIView):
+    serializer_class = BlogPostSerializer
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
         return BlogPost.objects.filter(category__slug=slug)
 
 # Для работы с постами
@@ -27,6 +33,10 @@ class BlogPostListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         # Вы можете добавить дополнительную логику перед сохранением поста, если нужно
+        serializer.save()
+
+    def perform_create(self, serializer):
+        # You can add any additional logic before saving the post if needed
         serializer.save()
 
 class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -44,3 +54,8 @@ class CommentListCreateView(generics.ListCreateAPIView):
         # Устанавливаем автора как текущего пользователя
         serializer.save(author=self.request.user)
 
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # Устанавливаем автора как текущего пользователя
+        serializer.save(author=self.request.user)

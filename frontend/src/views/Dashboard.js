@@ -205,4 +205,8 @@ function Dashboard() {
   );
 }
 
+<<<<<<< HEAD
 export default Dashboard;
+=======
+export default Dashboard;
+>>>>>>> ebea25b5faf2cca59e4875c1b3a6bd56658b4d93
