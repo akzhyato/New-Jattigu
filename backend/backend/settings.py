@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'blog',
+    'exercise_management',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',

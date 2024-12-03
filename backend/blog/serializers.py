@@ -8,13 +8,19 @@ class BlogCategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'slug']
 
 class BlogPostSerializer(serializers.ModelSerializer):
-    category = BlogCategorySerializer()  # Вложенный сериализатор для категории
+    category_id = serializers.PrimaryKeyRelatedField(queryset=BlogCategory.objects.all(), source='category', write_only=True)
+
     class Meta:
         model = BlogPost
-        fields = ['id', 'title', 'content', 'created_at', 'category', 'image', 'time_to_read']
+        fields = ['id', 'title', 'content', 'created_at', 'category_id', 'image', 'time_to_read']
+
+    def create(self, validated_data):
+        category = validated_data.pop('category', None)
+        post = BlogPost.objects.create(**validated_data, category=category)
+        return post
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField()  # Здесь можно использовать UserSerializer для подробного вывода информации
     class Meta:
         model = Comment
         fields = ['id', 'content', 'created_at', 'post', 'author']
+        read_only_fields = ['author']

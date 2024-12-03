@@ -1,99 +1,56 @@
-import React from 'react';
+import { motion } from 'framer-motion';
+import bg from '../assets/bg.png';
+import Footer from '../components/Footer';
+import Pricing from '../components/Pricing';
+import Figure from '../components/Figure';
+import WayChoose from '../components/WayChoose';
 
-function Homepage() {
+function HomePage() {
   return (
-    <div>
-      <>
-        <main
-          role="madin"
-          style={{ marginTop: 50 }}
-        >
-          {/* Main jumbotron for a primary marketing message or call to action */}
-          <div className="jumbotron">
-            <div className="container">
-              <h1 className="display-3">Hello, world!</h1>
-              <p>
-                This is a template for a simple marketing or informational
-                website. It includes a large callout called a jumbotron and
-                three supporting pieces of content. Use it as a starting point
-                to create something more unique.
-              </p>
-              <p>
-                <a
-                  className="btn btn-primary btn-lg"
-                  href="#"
-                  role="button"
-                >
-                  Learn more »
-                </a>
-              </p>
-            </div>
+    <div className="bg-white">
+      <div className="w-[1500px] max-h-[850px] relative">
+        <div className="flex justify-center items-center text-black">
+          <div className="mx-10 w-[645px] h-[493px] flex-1">
+            <motion.h1
+              className="font-bold text-6xl"
+              initial={{ opacity: 0, y: -50 }} // Initial state
+              animate={{ opacity: 1, y: 0 }} // Animate to this state
+              transition={{ duration: 0.8 }} // Animation duration
+            >
+              Elevate your workout
+            </motion.h1>
+            <motion.p
+              className="text-base"
+              initial={{ opacity: 0, y: 20 }} // Initial state
+              animate={{ opacity: 1, y: 0 }} // Animate to this state
+              transition={{ duration: 0.8, delay: 0.2 }} // Animation duration with a delay
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </motion.p>
           </div>
-          <div className="container">
-            {/* Example row of columns */}
-            <div className="row">
-              <div className="col-md-4">
-                <h2>Heading</h2>
-                <p>
-                  Donec id elit non mi porta gravida at eget metus. Fusce
-                  dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                  malesuada magna mollis euismod. Donec sed odio dui.{' '}
-                </p>
-                <p>
-                  <a
-                    className="btn btn-secondary"
-                    href="#"
-                    role="button"
-                  >
-                    View details »
-                  </a>
-                </p>
-              </div>
-              <div className="col-md-4">
-                <h2>Heading</h2>
-                <p>
-                  Donec id elit non mi porta gravida at eget metus. Fusce
-                  dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                  malesuada magna mollis euismod. Donec sed odio dui.{' '}
-                </p>
-                <p>
-                  <a
-                    className="btn btn-secondary"
-                    href="#"
-                    role="button"
-                  >
-                    View details »
-                  </a>
-                </p>
-              </div>
-              <div className="col-md-4">
-                <h2>Heading</h2>
-                <p>
-                  Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-                  egestas eget quam. Vestibulum id ligula porta felis euismod
-                  semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                  condimentum nibh, ut fermentum massa justo sit amet risus.
-                </p>
-                <p>
-                  <a
-                    className="btn btn-secondary"
-                    href="#"
-                    role="button"
-                  >
-                    View details »
-                  </a>
-                </p>
-              </div>
-            </div>
-            <hr />
-          </div>{' '}
-          {/* /container */}
-        </main>
-      </>
+          <div className="flex-1 flex justify-center relative">
+            <motion.img
+              className="z-[1]"
+              src={bg}
+              style={{ width: '671.67px', height: '650px' }}
+              alt="Background"
+              initial={{ scale: 0 }} // Initial state for image scaling
+              animate={{ scale: 1 }} // Animate to normal size
+              transition={{ duration: 0.8, delay: 0.4 }} // Animation duration with a delay
+            />
+            <div className="bg-gray-900 w-[490px] h-[850px] absolute right-[-19px] top-[-200px] z-[0]"></div>
+          </div>
+        </div>
+      </div>
+      <Figure />
+      <WayChoose />
+      {/* <Pricing /> */}
+      <Footer />
     </div>
   );
 }
 
-export default Homepage;
+export default HomePage;
