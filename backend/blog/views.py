@@ -1,5 +1,6 @@
 # views.py
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from .models import BlogCategory, BlogPost, Comment
 from .serializers import BlogCategorySerializer, BlogPostSerializer, CommentSerializer
 
@@ -25,10 +26,13 @@ class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BlogPostSerializer
 
 # Для работы с комментариями
+# Для работы с комментариями
 class CommentListCreateView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
 
-class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    def perform_create(self, serializer):
+        # Устанавливаем автора как текущего пользователя
+        serializer.save(author=self.request.user)
+

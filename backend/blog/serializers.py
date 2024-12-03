@@ -14,7 +14,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'content', 'created_at', 'category', 'image', 'time_to_read']
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField()  # Здесь можно использовать UserSerializer для подробного вывода информации
     class Meta:
         model = Comment
         fields = ['id', 'content', 'created_at', 'post', 'author']
+        read_only_fields = ['author']
