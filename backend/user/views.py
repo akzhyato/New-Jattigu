@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import User
+from .permissions import IsAdminUser, IsRegularUser
+from rest_framework.views import APIView
 from .serializer import MyTokenObtainPairSerializer, RegisterSerializer
 
 from rest_framework.decorators import api_view, permission_classes
@@ -50,10 +52,24 @@ def testEndPoint(request):
     if request.method == 'GET':
         data = f"Congratulations {request.user}, your API just responded to a GET request."
         return Response({'response': data}, status=status.HTTP_200_OK)
-    
+
     elif request.method == 'POST':
         text = request.data.get('text', 'Hello buddy')
         data = f"Congratulations! Your API just responded to a POST request with text: {text}"
         return Response({'response': data}, status=status.HTTP_200_OK)
-    
+
     return Response({'error': 'Invalid request method'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AdminOnlyView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        return Response({"message": "Hello, Admin!"})
+
+
+class UserOnlyView(APIView):
+    permission_classes = [IsRegularUser]
+
+    def get(self, request):
+        return Response({"message": "Hello, User!"})

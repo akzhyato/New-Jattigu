@@ -23,6 +23,12 @@ class User(AbstractUser):
         ],
         blank=True
     )
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('user', 'Regular User'),
+    ]
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
+
 
     # Поле email становится уникальным идентификатором
     USERNAME_FIELD = 'email'
