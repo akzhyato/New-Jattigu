@@ -9,6 +9,7 @@ import Registerpage from './views/Registerpage';
 import Loginpage from './views/Loginpage';
 import Dashboard from './views/Dashboard';
 import Navbar from './views/Navbar';
+import BlogPage from './views/BlogPage';
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
           <Route
             component={Homepage}
             path="/"
+            exact
+          />
+          <Route
+            component={BlogPage}
+            path="/blog"
             exact
           />
         </Switch>

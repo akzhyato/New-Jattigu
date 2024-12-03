@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
-import swal from 'sweetalert2';
 
 function Registerpage() {
   const [email, setEmail] = useState('');
@@ -34,168 +33,129 @@ function Registerpage() {
 
   return (
     <div>
-      <section
-        className="vh-100"
-        style={{ backgroundColor: '#9A616D' }}
-      >
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col col-xl-10">
-              <div
-                className="card"
-                style={{ borderRadius: '1rem' }}
-              >
-                <div className="row g-0">
-                  <div className="col-md-6 col-lg-5 d-none d-md-block">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-                      alt="login form"
-                      className="img-fluid"
-                      style={{ borderRadius: '1rem 0 0 1rem' }}
-                    />
-                  </div>
-                  <div className="col-md-6 col-lg-7 d-flex align-items-center">
-                    <div className="card-body p-4 p-lg-5 text-black">
-                      <form onSubmit={handleSubmit}>
-                        <div className="d-flex align-items-center mb-3 pb-1">
-                          <i
-                            className="fas fa-cubes fa-2x me-3"
-                            style={{ color: '#ff6219' }}
-                          />
-                          <span className="h2 fw-bold mb-0">
-                            Welcome to <b>Desphixs👋</b>
-                          </span>
-                        </div>
-                        <h5
-                          className="fw-normal mb-3 pb-3"
-                          style={{ letterSpacing: 1 }}
-                        >
-                          Sign Up
-                        </h5>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="email"
-                            id="form2Example17"
-                            className="form-control form-control-lg"
-                            placeholder="Email Address"
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="text"
-                            id="form2Example17"
-                            className="form-control form-control-lg"
-                            placeholder="Username"
-                            onChange={(e) => setUsername(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="password"
-                            id="form2Example17"
-                            className="form-control form-control-lg"
-                            placeholder="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="password"
-                            id="form2Example27"
-                            className="form-control form-control-lg"
-                            placeholder="Confirm Password"
-                            onChange={(e) => setPassword2(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="number"
-                            id="form2ExampleAge"
-                            className="form-control form-control-lg"
-                            placeholder="Age"
-                            onChange={(e) => setAge(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <select
-                            id="form2ExampleGender"
-                            className="form-control form-control-lg"
-                            onChange={(e) => setGender(e.target.value)}
-                          >
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                          </select>
-                        </div>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="number"
-                            id="form2ExampleWeight"
-                            className="form-control form-control-lg"
-                            placeholder="Weight (kg)"
-                            onChange={(e) => setWeight(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <input
-                            type="number"
-                            id="form2ExampleHeight"
-                            className="form-control form-control-lg"
-                            placeholder="Height (cm)"
-                            onChange={(e) => setHeight(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-outline mb-4">
-                          <select
-                            id="form2ExampleGender"
-                            className="form-control form-control-lg"
-                            onChange={(e) => setFitnessGoal(e.target.value)}
-                          >
-                            <option value="male">Lose Weight</option>
-                            <option value="female">Build Muscle</option>
-                            <option value="other">Stay Fit</option>
-                          </select>
-                        </div>
-                        <div className="pt-1 mb-4">
-                          <button
-                            className="btn btn-dark btn-lg btn-block"
-                            type="submit"
-                          >
-                            Register
-                          </button>
-                        </div>
-                        <a
-                          className="small text-muted"
-                          href="#!"
-                        >
-                          Forgot password?
-                        </a>
-                        <p
-                          className="mb-5 pb-lg-2"
-                          style={{ color: '#393f81' }}
-                        >
-                          Already have an account?{' '}
-                          <Link
-                            to="/login"
-                            style={{ color: '#393f81' }}
-                          >
-                            Login Now
-                          </Link>
-                        </p>
-                        <a
-                          href="#!"
-                          className="small text-muted"
-                        >
-                          Terms of use.
-                        </a>
-                        <a
-                          href="#!"
-                          className="small text-muted"
-                        >
-                          Privacy policy
-                        </a>
-                      </form>
+      <section className="min-h-screen bg-gray-200 flex items-center justify-center">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="hidden md:block">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                  alt="login form"
+                  className="h-full w-full object-cover rounded-l-lg"
+                />
+              </div>
+              <div className="flex items-center">
+                <div className="p-8 w-full">
+                  <form onSubmit={handleSubmit}>
+                    <div className="text-center mb-6">
+                      <h2 className="text-2xl font-bold text-gray-800">
+                        Welcome to <b>Desphixs 👋</b>
+                      </h2>
+                      <p className="text-gray-600">Sign Up</p>
                     </div>
+                    <div className="space-y-4">
+                      <input
+                        type="email"
+                        placeholder="Email Address"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Username"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setPassword2(e.target.value)}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Age"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setAge(e.target.value)}
+                      />
+                      <select
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setGender(e.target.value)}
+                      >
+                        <option
+                          value=""
+                          disabled
+                          selected
+                        >
+                          Select Gender
+                        </option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                      <input
+                        type="number"
+                        placeholder="Weight (kg)"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setWeight(e.target.value)}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Height (cm)"
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setHeight(e.target.value)}
+                      />
+                      <select
+                        className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setFitnessGoal(e.target.value)}
+                      >
+                        <option
+                          value=""
+                          disabled
+                          selected
+                        >
+                          Select Fitness Goal
+                        </option>
+                        <option value="lose_weight">Lose Weight</option>
+                        <option value="build_muscle">Build Muscle</option>
+                        <option value="stay_fit">Stay Fit</option>
+                      </select>
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-indigo-600 text-white p-3 rounded-lg mt-6 hover:bg-indigo-700"
+                    >
+                      Register
+                    </button>
+                    <div className="text-center mt-4 text-gray-600">
+                      Already have an account?{' '}
+                      <Link
+                        to="/login"
+                        className="text-indigo-500"
+                      >
+                        Login Now
+                      </Link>
+                    </div>
+                  </form>
+                  <div className="text-center mt-4 text-sm text-gray-500">
+                    <a
+                      href="#!"
+                      className="hover:underline"
+                    >
+                      Terms of use
+                    </a>{' '}
+                    |{' '}
+                    <a
+                      href="#!"
+                      className="hover:underline"
+                    >
+                      Privacy policy
+                    </a>
                   </div>
                 </div>
               </div>
@@ -203,12 +163,6 @@ function Registerpage() {
           </div>
         </div>
       </section>
-      <footer className="bg-light text-center text-lg-start">
-        <div
-          className="text-center p-3"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
-        ></div>
-      </footer>
     </div>
   );
 }
