@@ -7,13 +7,12 @@ class ExerciseForm(forms.ModelForm):
         model = Exercise
         fields = ['name', 'description', 'starting_position', 'execution', 'category', 'equipment_needed']
         widgets = {
-            'category': forms.CheckboxSelectMultiple(),  # Allows multiple categories to be selected
+            'category': forms.CheckboxSelectMultiple(),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'starting_position': forms.Textarea(attrs={'class': 'form-control'}),
             'execution': forms.Textarea(attrs={'class': 'form-control'}),
-            'equipment_needed': forms.CheckboxSelectMultiple(attrs={'class': 'form-control'}),  # Updated widget
+            'equipment_needed': forms.CheckboxSelectMultiple(attrs={'class': 'form-control'}),
         }
-
 
 class ExerciseCategoryForm(forms.ModelForm):
     class Meta:

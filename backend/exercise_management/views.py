@@ -1,100 +1,110 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from .models import Exercise, ExerciseCategory, EquipmentCategory
-from .forms import ExerciseForm, ExerciseCategoryForm, EquipmentCategoryForm
+from .serializers import ExerciseSerializer, ExerciseCategorySerializer, EquipmentCategorySerializer
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 # List all exercises
-def exercise_list(request):
-    exercises = Exercise.objects.all()
-    return render(request, 'exercise_management/exercise_list.html', {'exercises': exercises})
+class ExerciseListView(generics.ListCreateAPIView):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
 
-# Detail view for a single exercise
-def exercise_detail(request, pk):
-    exercise = get_object_or_404(Exercise, pk=pk)
-    return render(request, 'exercise_management/exercise_detail.html', {'exercise': exercise})
-
-# Create a new exercise
-@login_required
+@api_view(['POST'])
 def exercise_create(request):
     if request.method == 'POST':
-        form = ExerciseForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('exercise_list')
-    else:
-        form = ExerciseForm()
-    return render(request, 'exercise_management/exercise_form.html', {'form': form})
+        serializer = ExerciseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)  # Created
+        return Response(serializer.errors, status=400)  # Bad Request
 
-# Update an existing exercise
-@login_required
+    # Update an existing exercise category
+@api_view(['PUT'])
 def exercise_update(request, pk):
-    exercise = get_object_or_404(Exercise, pk=pk)
-    if request.method == 'POST':
-        form = ExerciseForm(request.POST, instance=exercise)
-        if form.is_valid():
-            form.save()
-            return redirect('exercise_list')
-    else:
-        form = ExerciseForm(instance=exercise)
-    return render(request, 'exercise_management/exercise_form.html', {'form': form})
+    category = get_object_or_404(Exercise, pk=pk)
+    if request.method == 'PUT':
+        serializer = ExerciseSerializer(category, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)  # Updated
+        return Response(serializer.errors, status=400)  # Bad Request
 
+    # Delete an exercise category
+@api_view(['DELETE'])
+def exercise_delete(request, pk):
+    category = get_object_or_404(Exercise, pk=pk)
+    if request.method == 'DELETE':
+        category.delete()
+        return Response(status=204)  # No Content
+
+# Detail view for a single exercise
+class ExerciseDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
 
 # List all exercise categories
-def exercise_category_list(request):
-    categories = ExerciseCategory.objects.all()
-    return render(request, 'exercise_management/exercise_category_list.html', {'categories': categories})
+class ExerciseCategoryListView(generics.ListCreateAPIView):
+    queryset = ExerciseCategory.objects.all()
+    serializer_class = ExerciseCategorySerializer
 
 # Create a new exercise category
-@login_required
+@api_view(['POST'])
 def exercise_category_create(request):
     if request.method == 'POST':
-        form = ExerciseCategoryForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('exercise_category_list')
-    else:
-        form = ExerciseCategoryForm()
-    return render(request, 'exercise_management/exercise_category_form.html', {'form': form})
+        serializer = ExerciseCategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)  # Created
+        return Response(serializer.errors, status=400)  # Bad Request
 
-# Update an exercise category
-@login_required
+# Update an existing exercise category
+@api_view(['PUT'])
 def exercise_category_update(request, pk):
     category = get_object_or_404(ExerciseCategory, pk=pk)
-    if request.method == 'POST':
-        form = ExerciseCategoryForm(request.POST, request.FILES, instance=category)
-        if form.is_valid():
-            form.save()
-            return redirect('exercise_category_list')
-    else:
-        form = ExerciseCategoryForm(instance=category)
-    return render(request, 'exercise_management/exercise_category_form.html', {'form': form})
+    if request.method == 'PUT':
+        serializer = ExerciseCategorySerializer(category, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)  # Updated
+        return Response(serializer.errors, status=400)  # Bad Request
+
+# Delete an exercise category
+@api_view(['DELETE'])
+def exercise_category_delete(request, pk):
+    category = get_object_or_404(ExerciseCategory, pk=pk)
+    if request.method == 'DELETE':
+        category.delete()
+        return Response(status=204)  # No Content
+
+# Update or Delete an exercise category
+class ExerciseCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ExerciseCategory.objects.all()
+    serializer_class = ExerciseCategorySerializer
 
 # List all equipment categories
-def equipment_category_list(request):
-    equipment_categories = EquipmentCategory.objects.all()
-    return render(request, 'exercise_management/equipment_category_list.html', {'equipment_categories': equipment_categories})
+class EquipmentCategoryListView(generics.ListCreateAPIView):
+    queryset = EquipmentCategory.objects.all()
+    serializer_class = EquipmentCategorySerializer
 
 # Create a new equipment category
-@login_required
+@api_view(['POST'])
 def equipment_category_create(request):
     if request.method == 'POST':
-        form = EquipmentCategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('equipment_category_list')
-    else:
-        form = EquipmentCategoryForm()
-    return render(request, 'exercise_management/equipment_category_form.html', {'form': form})
+        serializer = EquipmentCategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)  # Created
+        return Response(serializer.errors, status=400)  # Bad Request
 
+
+# Delete an exercise category
+@api_view(['DELETE'])
 def exercise_category_delete(request, pk):
-    # Get the category by pk or return a 404 error if not found
     category = get_object_or_404(ExerciseCategory, pk=pk)
 
-    if request.method == "POST":
-        # Delete the category
+    if request.method == 'DELETE':
         category.delete()
-        # Redirect to the exercise categories list page
-        return redirect('exercise_category_list')  # Make sure to replace with your actual URL name
+        return Response(status=204)  # No Content
 
-    # If it's not a POST request, render the confirmation page
-    return render(request, 'exercise_management/exercise_category_confirm_delete.html', {'category': category})
